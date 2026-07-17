@@ -1,9 +1,8 @@
 MENU_WIDTH = 60
 MENU_SYMBOL = "-"
 MENU_TITLE = "PERSONAL FINANCE MANAGER"
-
 VALID_CHOICES = {"1", "2", "3", "4"}
-
+transactions = []
 
 def show_menu() -> None:
     """Display the main menu."""
@@ -49,7 +48,7 @@ def handle_choice(choice: str) -> bool:
         print("[INFO] Add Expense selected.")
 
     elif choice == "3":
-        print("[INFO] View Transactions selected.")
+        show_transactions()
 
     elif choice == "4":
         print("Goodbye!")
@@ -59,16 +58,53 @@ def handle_choice(choice: str) -> bool:
 
 def create_income() -> None:
     custom_line('*', 100, 'CREATE INCOME')
-    while True:
-        title = input('enter title income').strip()
-        category = input('enter category income').strip()
-        amount = input('enter amount income')
+    title = input('enter title income: ').strip()
+    category = input('enter category income: ').strip()
+    amount = input_amount()
 
-def validate_amount(amount)-> bool:
-    pass
+    data = {
+        'type': 'Income',
+        'title': title,
+        'category': category,
+        'amount': amount
+    }
+
+    transactions.append(data)
+    print('[SUCCESS] Transaction added successfully.')
+
+def input_amount() -> bool:
+    while True:
+        amount = input('enter amount income: ')
+        try:
+            amount = int(amount)
+            if amount <= 0:
+                print('amount is invalid')
+                continue
+            return amount
+        except Exception as ex:
+            print('Error', ex)
 
 def custom_line(symbol: str, width: int, title) -> None:
     print(title.center(width, symbol))
+
+def show_transactions() -> None:
+    custom_line('*', 100, 'SHOW TRANSACTIONS')
+    if len(transactions) < 1:
+        print('No transactions can view')
+    else:
+        for tran in transactions:
+            print_transaction(tran)
+            custom_line('-', 100, '')
+
+def print_transaction(transaction) -> None:
+    type = transaction.get('type', '')
+    title = transaction.get('title', '')
+    category = transaction.get('category', '')
+    amount = transaction.get('amount', '')
+    print('type: ', type)
+    print('title: ', title)
+    print('category: ', category)
+    print(f'amount: {amount:,}')
 
 def run() -> None:
     """Main program loop."""
