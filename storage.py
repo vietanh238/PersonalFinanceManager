@@ -3,7 +3,9 @@ import json
 transactions: list[dict] = []
 
 def save_transaction(transaction: dict) -> None:
-    transactions.append(transaction)
+    with open("data/transactions.json", "w") as file:
+        transactions.append(transaction)
+        json.dump(transactions, file, indent=4)
 
 def load_transactions() -> None:
     with open("data/transactions.json", "r") as file:

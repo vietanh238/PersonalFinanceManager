@@ -16,7 +16,9 @@ from validator import (
     choose_category,
     input_amount
 )
-
+from storage import (
+    load_transactions
+)
 
 def handle_choice(
     choice: str,
@@ -68,6 +70,7 @@ def run() -> None:
 
 
 def main() -> None:
+    load_transactions()
     run()
 
 

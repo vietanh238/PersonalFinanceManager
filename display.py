@@ -45,7 +45,7 @@ def print_transaction(
     print(f"Type      : {transaction['transaction_type']}")
     print(f"Title     : {transaction['title']}")
     print(f"Category  : {transaction['category']}")
-    print(f"Amount    : {transaction['amount']:,}")
+    print(f"Amount    : {transaction['amount']}")
 
 
 def show_transactions() -> None:

@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "transaction_type": "Income",
+    "title": "adsad",
+    "category": "Bonus",
+    "amount": 2323
+  }
+]
